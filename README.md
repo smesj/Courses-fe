@@ -1,4 +1,4 @@
-## Real course sign up front end
+# Real - Course Sign up Front End
 
 This project consists of the React front end for the course registration exercise
 

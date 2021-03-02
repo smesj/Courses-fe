@@ -1,6 +1,6 @@
 ## Real course sign up front end
 
-This project consists of the react front end for the course registration exercise
+This project consists of the React front end for the course registration exercise
 
 Other than the provided boilerplate this project makes use of the Material framework and uses MomentJs for date parsing/formatting
 

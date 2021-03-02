@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
 import isMoment from 'moment';
 import moment from 'moment';
 import axiosClient from '../axiosClient';
@@ -62,17 +62,31 @@ export const Section = ({section, user}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        {!isPast(section.startDate) && 
+        {!isPast(section.startDate) ? 
           <>
             {isMySection(user, section) ?
-            <Button size="small" variant="contained" color="primary" onClick={() => {enrollSection(user.id, section.id)}} disabled={isFull(section)}>
-              Register
-            </Button> :
-            <Button size="small" variant="contained" color="primary" onClick={() => {unenrollSection(user.id, section.id)}}>
-              leave
-            </Button>
+              <>
+                {!isFull(section) ? 
+                  <Button size="small" variant="contained" color="primary" onClick={() => {enrollSection(user.id, section.id)}}>
+                    Register
+                  </Button> :
+                  <Chip
+                    label="Section Full"
+                    color="secondary"
+                  />
+                }
+              </>
+              :
+              <Button size="small" variant="contained" color="primary" onClick={() => {unenrollSection(user.id, section.id)}}>
+                leave
+              </Button>
             }
-          </>
+          </> 
+          :
+          <Chip
+            label="Registration Closed"
+            color="secondary"
+          />
         }
       </CardActions>
     </Card>
@@ -83,8 +97,13 @@ Section.propTypes = {
   section: PropTypes.shape({
     id: PropTypes.number,
     nickname: PropTypes.string,
-    startDate: PropTypes.instanceOf(Date),
+    startDate: PropTypes.string,
     users: PropTypes.arrayOf(PropTypes.object)
   }),
-  user: {}
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    userName: PropTypes.string,
+    email: PropTypes.string,
+    courseSections: PropTypes.arrayOf(PropTypes.object)
+  })
 }

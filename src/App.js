@@ -22,7 +22,7 @@ function App() {
 					<Toolbar>
             <ClassIcon  className={classes.menuIcon}/>
 						<Typography variant="h6" className={classes.title}>
-							My Courses
+							{user ? user.username+'\'s Courses' : 'My Courses'}
 						</Typography>
             {user &&
               <Button color="inherit" onClick={() => logout()}>Logout</Button>
@@ -30,7 +30,7 @@ function App() {
 					</Toolbar>
 				</AppBar>
 			</div>
-			{!!user ? <Courses user={user} /> : <Login />}
+			{user ? <Courses user={user} /> : <Login />}
 		</div>
 	);
 }
@@ -46,5 +46,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
     flexGrow: 1,
+    textTransform: 'capitalize'
 	},
 }));

@@ -60,11 +60,6 @@ export const Section = ({section, user}) => {
         <Typography color="textSecondary">
           {section.users.length} / 5
         </Typography>
-        <Typography variant="body2" component="p" hidden={isMySection(user, section)}>
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
       </CardContent>
       <CardActions>
         {!isPast(section.startDate) && 

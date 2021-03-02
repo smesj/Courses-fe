@@ -14,10 +14,10 @@ function App() {
   const logout = () => {
     setUser(null)
   }
-  
+
 	return (
 		<div className='App'>
-			<div className={classes.root}>
+			<div className={classes.bar}>
 				<AppBar position="static">
 					<Toolbar>
             <ClassIcon  className={classes.menuIcon}/>
@@ -38,7 +38,7 @@ function App() {
 export default withUser(App);
 
 const useStyles = makeStyles((theme) => ({
-	root: {
+	bar: {
     flexGrow: 1,
 	},
 	menuIcon: {

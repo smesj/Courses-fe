@@ -1,4 +1,3 @@
-import './App.css';
 import ClassIcon from '@material-ui/icons/Class';
 import React, { useContext } from 'react';
 import withUser, { UserContext } from './components/hoc/withUser';

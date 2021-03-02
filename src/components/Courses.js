@@ -1,21 +1,21 @@
 import { Accordion, AccordionDetails, AccordionSummary, Card, CardHeader, Container, makeStyles, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import React, { useEffect, useState } from 'react';
-import axiosClient from '../axiosClient';
 import { Section } from './Section';
 import PropTypes from 'prop-types';
+import api from './api';
 
 export const Courses = ({ user }) => {
   const classes = useStyles();
 	const [courses, setCourses] = useState([]);
-	const getCourses = async () => {
-		const listcoursesResponse = await axiosClient.post('/courses/list');
-		setCourses(listcoursesResponse.data.courses)
-	}
 
 	useEffect(() => {
 		getCourses();
 	},[user])
+
+  const getCourses = async () => {
+    api.getCourses().then(courses => setCourses(courses))
+	}
 
   const isMyCourse = (user, course) => {
     if (user.courseSections?.some(el => el.courseId === course.id)) {

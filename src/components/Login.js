@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from './hoc/withUser';
-import axiosClient from '../axiosClient';
 import { Button, makeStyles, TextField } from '@material-ui/core';
+import api from './api';
 
 export const Login = () => {
 	const { setUser } = useContext(UserContext);
@@ -10,8 +10,7 @@ export const Login = () => {
 
 	const login = async (e) => {
 		e.preventDefault();
-		const loginResponse = await axiosClient.post('/users/login', creds);
-		setUser(loginResponse.data.user);
+    api.login(creds).then(user => setUser(user))
 	};
 
 	const onChange = (e) => {

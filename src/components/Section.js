@@ -3,28 +3,22 @@ import PropTypes from 'prop-types';
 import { Button, Card, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
 import isMoment from 'moment';
 import moment from 'moment';
-import axiosClient from '../axiosClient';
 import { UserContext } from './hoc/withUser';
+import api from './api';
 
 export const Section = ({section, user}) => {
 
   const { setUser } = useContext(UserContext);
-  const enrollSection = async (userId, sectionId) => {
-    const request = {
-      userId,
-      sectionId
-    }
-    const enrollResponse = await axiosClient.post('/courses/enrollUserForSection', request);
-    setUser(enrollResponse.data.user)
+  const enrollSection = (userId, sectionId) => {
+    api.enrollSection(userId, sectionId).then(user =>
+      setUser(user)
+    );
   }
 
   const unenrollSection = async (userId, sectionId) => {
-    const request = {
-      userId,
-      sectionId
-    }
-    const unenrollResponse = await axiosClient.post('/courses/unenrollUserForSection', request);
-    setUser(unenrollResponse.data.user)
+    api.unenrollSection(userId, sectionId).then(user =>
+      setUser(user)
+    );
   }
 
   const isMySection = (user, section) => {
